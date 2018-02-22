@@ -9,30 +9,30 @@ namespace DatingApp.API.Helpers
     {
         public AutoMapperProfiles()
         {
-            CreateMap<UserForListDto, User>();
-            CreateMap<User, UserForListDto>()
-                .ForMember(dest => dest.PhotoUrl, opt => {
-                    opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.IsMain).Url);
-                })
-                .ForMember(dest => dest.Age, opt => {
-                    opt.ResolveUsing(d => d.DateOfBirth.CalculateAge());
-                });
-
-            CreateMap<UserForDetailsDto, User>();
             CreateMap<User, UserForDetailsDto>()
-                .ForMember(dest => dest.PhotoUrl, opt => {
+                .ForMember(dest => dest.PhotoUrl, opt => 
+                {
                     opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.IsMain).Url);
                 })
-                .ForMember(dest => dest.Age, opt => {
+                .ForMember(dest => dest.Age, opt =>
+                {
                     opt.ResolveUsing(d => d.DateOfBirth.CalculateAge());
                 });
-
-            CreateMap<User, UserForRegisterDto>().ReverseMap();
-            CreateMap<User, UserForUpdateDto>().ReverseMap();
-            CreateMap<Photo, PhotosForDetailsDto>().ReverseMap();
-            CreateMap<Photo, PhotoForCreationDto>().ReverseMap();
-            CreateMap<Photo, PhotoForReturnDto>().ReverseMap();
-            CreateMap<Message, MessageForCreationDto>().ReverseMap();
+            CreateMap<User, UserForListDto>()
+                .ForMember(dest => dest.PhotoUrl, opt => 
+                {
+                    opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.IsMain).Url);
+                })
+                .ForMember(dest => dest.Age, opt =>
+                {
+                    opt.ResolveUsing(d => d.DateOfBirth.CalculateAge());
+                });
+            CreateMap<Photo, UserForDetailsDto>();
+            CreateMap<UserForUpdateDto, User>();
+            CreateMap<PhotoForCreationDto, Photo>();
+            CreateMap<Photo, PhotoForReturnDto>();
+            CreateMap<UserForRegisterDto, User>();
+            CreateMap<MessageForCreationDto, Message>().ReverseMap();
             CreateMap<Message, MessageToReturnDto>()
                 .ForMember(m => m.SenderPhotoUrl, opt => 
                     opt.MapFrom(u => u.Sender.Photos.FirstOrDefault(p => p.IsMain).Url))
