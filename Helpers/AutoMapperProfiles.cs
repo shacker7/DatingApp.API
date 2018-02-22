@@ -27,16 +27,12 @@ namespace DatingApp.API.Helpers
                     opt.ResolveUsing(d => d.DateOfBirth.CalculateAge());
                 });
 
-            CreateMap<Photo, PhotosForDetailsDto>();
-            CreateMap<PhotosForDetailsDto, Photo>();
-            CreateMap<UserForUpdateDto, User>();
-            CreateMap<User, UserForUpdateDto>();
-            CreateMap<PhotoForCreationDto, Photo>();
-            CreateMap<Photo, PhotoForCreationDto>();
-            CreateMap<PhotoForReturnDto, Photo>();
-            CreateMap<Photo, PhotoForReturnDto>();
-            CreateMap<User, UserForRegisterDto>();
-            CreateMap<UserForRegisterDto, User>();
+            CreateMap<User, UserForRegisterDto>().ReverseMap();
+            CreateMap<User, UserForUpdateDto>().ReverseMap();
+            CreateMap<Photo, PhotosForDetailsDto>().ReverseMap();
+            CreateMap<Photo, PhotoForCreationDto>().ReverseMap();
+            CreateMap<Photo, PhotoForReturnDto>().ReverseMap();
+            CreateMap<Message, MessageForCreationDto>().ReverseMap();
         }
     }
 }
